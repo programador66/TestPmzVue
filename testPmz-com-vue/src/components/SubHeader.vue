@@ -1,27 +1,37 @@
 <template>
-    <div id="subheader"  v-if="subheader">
+    <div id="subheader">
        
         <section class="container grid grid-template-columns-3">
             <div id="msgBoasVindas"><div id="msg1"> Bem vindo (a) ao <div id="msg2">Sistema TI </div> </div></div>
             <div ></div>
             <button id="btCadastrar" @click="cadastro()">Novo cadastro</button>
         </section>
-            
+         <section v-if="!cadastrar">
+             <Table/>
+         </section>  
+         <section>
+             <FormCadastro/>
+         </section> 
     </div>
 </template>
 
 <script>
+
+import Table from './Table';
+import FormCadastro from './FormCadastro';
 export default {
     data:function(){
        return {
-           cadastrar:false,
-           subheader:true,
+           cadastrar:false
        } 
     },
+    components: {
+    Table,FormCadastro
+  },
     methods:{
          cadastro(){
              console.log('alou');
-            return  this.subheader = false;
+            return  this.cadastrar = true;
         }      
     },
 name: "subheader"
