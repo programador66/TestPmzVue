@@ -38,7 +38,7 @@ name: "subheader"
 }
 </script>
 
-<style>
+<style scoped>
 
 #subheader{
   margin-top: 3%;

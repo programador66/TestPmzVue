@@ -1,7 +1,7 @@
 <template>
     <div class="tabForm">
         <div class="container grid ">
-         
+         <div></div>
            <div class="form container grid grid-template-columns-3">
                 <div id="FormNome">
                     <div id="nomeCompleto"> Nome Completo </div>
@@ -16,7 +16,7 @@
                     <span style="margin-left:3.5%;"><button id="btSalvar">Salvar Cadastro</button></span>
                 </div>
            </div>
-            
+            <div></div>
         </div>
     </div>
 </template>  
@@ -146,6 +146,7 @@ name: "FormCadastro"
     border-radius: 8px;
     padding: 0%;
     background: white;
+    font-weight: bold;
     
 }
 
@@ -157,6 +158,7 @@ name: "FormCadastro"
 #btSalvar:hover {
      background: #1D334B;
      color : white;
+      font-weight: bold;
 }
 
 </style>
