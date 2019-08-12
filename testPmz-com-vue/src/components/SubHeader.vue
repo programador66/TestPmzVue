@@ -1,10 +1,10 @@
 <template>
-    <div id="subheader">
+    <div id="subheader"  v-if="subheader">
        
         <section class="container grid grid-template-columns-3">
             <div id="msgBoasVindas"><div id="msg1"> Bem vindo (a) ao <div id="msg2">Sistema TI </div> </div></div>
             <div ></div>
-            <button id="btCadastrar">Novo cadastro</button>
+            <button id="btCadastrar" @click="cadastro()">Novo cadastro</button>
         </section>
             
     </div>
@@ -12,6 +12,18 @@
 
 <script>
 export default {
+    data:function(){
+       return {
+           cadastrar:false,
+           subheader:true,
+       } 
+    },
+    methods:{
+         cadastro(){
+             console.log('alou');
+            return  this.subheader = false;
+        }      
+    },
 name: "subheader"
 }
 </script>
@@ -59,7 +71,7 @@ color: #4A4A4A;
 }
 
 #btCadastrar{
-    margin-top: 1.5%;
+    margin-top: 2%;
     height: 35px;
     width: 182px;
     border: solid 1px #1D334B;

@@ -1,30 +1,29 @@
 <template>
     <div class="tab">
         <div class="container grid">
-        <div></div>
-        <table id="table" >
-                  <thead>
-                      <tr>
-                          <th> Código </th>
-                          <th> Nome Completo </th>
-                          <th> Registro</th>
-                      </tr>
-                 </thead>
-                 <tbody>
-                     <tr> 
-                     <td> 022913 </td>
-                     <td> Ana Souza Silva </td>
-                     <td> Ativo</td>
-                     </tr>
-                     <tr> 
-                     <td> 022913 </td>
-                     <td> Ana Souza Silva </td>
-                     <td> Ativo</td>
-                     </tr>
-                  </tbody>
+            <div></div>
+            <table id="table" >
+                <thead>
+                    <tr>
+                    <th> Código </th>
+                    <th> Nome Completo </th>
+                    <th> Registro</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr> 
+                        <td> 022913 </td>
+                        <td> Ana Souza Silva </td>
+                        <td> <span class="ativo">at</span> Ativo</td>
+                    </tr>
+                    <tr> 
+                        <td> 022913 </td>
+                        <td> Ana Souza Silva </td>
+                        <td> <span class="inativo">in</span> Ativo</td>
+                    </tr>
+                </tbody>
             </table>
-        <div></div>
-        
+            <div></div>
         </div>
     </div>
 </template>  
@@ -52,7 +51,7 @@ name: "Table"
    th{
        background: white ;
        border-top: solid 6px #1D334B;
-       border-bottom: solid 1px #1D334B;
+       border-bottom: solid 2px #1D334B;
        font-family: 'Arial';
        font-weight: bold;
        color: #4A4A4A;
@@ -61,13 +60,27 @@ name: "Table"
    td{
       font-family: 'Arial','Regular';
       color: #898888;
-      /* border:solid 1px #4A4A4A;  */
+      height: 40px;
+      border-bottom:solid 1px #4A4A4A;
+      text-align: center 
    }
    .tab{
        margin-top: 3%;
    }
 
+   .ativo{
+       border-radius: 50%;
+       border: solid 1px #4CC371;
+       background-color: #4CC371;
+       color: #4CC371; 
+   }
 
+   .inativo{
+       border-radius: 50%;
+       border: solid 1px #F03C3C;
+       background-color: #F03C3C;
+       color: #F03C3C; 
+   } 
 
 /* Grid Container */
 .grid {
