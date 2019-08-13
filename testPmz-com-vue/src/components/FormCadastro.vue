@@ -12,7 +12,7 @@
                     <div id="checkRegistro"><input type="checkbox" id="reg"/></div>
                 </div>
                 <div id="FormSalvar">
-                    <span><button id="bt">Cancelar</button></span>
+                    <span><button id="bt" @click="cancelar()">Cancelar</button></span>
                     <span style="margin-left:3.5%;"><button id="btSalvar">Salvar Cadastro</button></span>
                 </div>
            </div>
@@ -23,7 +23,19 @@
 
 <script>
 export default {
-name: "FormCadastro"
+name: "FormCadastro",
+data(){
+    return {
+
+    }
+},
+methods:{
+    cancelar() {
+        this.$emit('cancelar',false);
+        this.$emit('msg1','Bem vindo (a) ao');
+        this.$emit('msg2','Sistema TI');
+    }
+}
 }
 </script>
 

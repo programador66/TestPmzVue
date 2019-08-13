@@ -2,15 +2,15 @@
     <div id="subheader">
        
         <section class="container grid grid-template-columns-3">
-            <div id="msgBoasVindas"><div id="msg1"> Bem vindo (a) ao <div id="msg2">Sistema TI </div> </div></div>
+            <div id="msgBoasVindas"> <div id="msg1"> {{msg1}} <div id="msg2">{{msg2}} </div> </div></div>
             <div ></div>
-            <button id="btCadastrar" @click="cadastro()">Novo cadastro</button>
+            <button id="btCadastrar" @click="cadastro()" v-if="!cadastrar">Novo cadastro</button>
         </section>
          <section v-if="!cadastrar">
              <Table/>
          </section>  
-         <section>
-             <FormCadastro/>
+         <section v-else>
+             <FormCadastro @cancelar="cadastrar=$event" @msg1="msg1=$event" @msg2="msg2=$event" />
          </section> 
     </div>
 </template>
@@ -22,7 +22,9 @@ import FormCadastro from './FormCadastro';
 export default {
     data:function(){
        return {
-           cadastrar:false
+           cadastrar:false,
+           msg1: 'Bem vindo (a) ao ',
+           msg2: 'Sistema TI'
        } 
     },
     components: {
@@ -30,8 +32,9 @@ export default {
   },
     methods:{
          cadastro(){
-             console.log('alou');
-            return  this.cadastrar = true;
+            this.cadastrar = true;
+            this.msg1 = 'Sistema TI';
+            this.msg2 = 'Novo Cadastro';
         }      
     },
 name: "subheader"
@@ -59,25 +62,26 @@ name: "subheader"
 .subgrid > div {
 	background: rgba(0,0,0,.3);
 }
-.item {
-	margin: 5px;
-	background: tomato;
-	text-align: center;
-	font-size: 1.5em;
-}
+
 
 #msgBoasVindas{
-    text-align: center;
+    text-align: left;
     margin: 5px;
     font-family: 'Arial ';
+    margin-left: 34%;
+
 }
 #msg1{
 color: #4A4A4A;
+text-align: left;
+
+
 }
 #msg2{
     font-size: 30px;
     font-family: 'Arial';
     font-weight: bold;
+    text-align: left;
 }
 
 #btCadastrar{
