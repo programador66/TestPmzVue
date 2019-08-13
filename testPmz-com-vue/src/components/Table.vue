@@ -8,19 +8,24 @@
                     <th> Código </th>
                     <th> Nome Completo </th>
                     <th> Registro</th>
+                    <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr> 
+                    <tr @click="mouse=true"> 
                         <td> 022913 </td>
                         <td> Ana Souza Silva </td>
                         <td> <span class="ativo"></span> Ativo</td>
+                        <td >  </td>
                     </tr>
                     <tr> 
                         <td> 022913 </td>
                         <td> Ana Souza Silva </td>
                         <td> <span class="inativo"></span> Ativo</td>
+                        <td> </td>
                     </tr>
+
+                    
                 </tbody>
             </table>
             <div></div>
@@ -30,7 +35,12 @@
 
 <script>
 export default {
-name: "Table"
+name: "Table",
+data() {
+    return {
+        mouse:false
+    }
+}
 }
 </script>
 

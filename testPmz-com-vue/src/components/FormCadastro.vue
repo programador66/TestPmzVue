@@ -100,6 +100,7 @@ methods:{
    #nome{
        width: 600px;
        height: 38px;
+       font-size: 20px;
    } 
 
    .ativo{
