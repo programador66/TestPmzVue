@@ -14,12 +14,12 @@
                     <tr> 
                         <td> 022913 </td>
                         <td> Ana Souza Silva </td>
-                        <td> <span class="ativo">at</span> Ativo</td>
+                        <td> <span class="ativo"></span> Ativo</td>
                     </tr>
                     <tr> 
                         <td> 022913 </td>
                         <td> Ana Souza Silva </td>
-                        <td> <span class="inativo">in</span> Ativo</td>
+                        <td> <span class="inativo"></span> Ativo</td>
                     </tr>
                 </tbody>
             </table>
@@ -69,18 +69,20 @@ name: "Table"
    }
 
    .ativo{
-       border-radius: 50%;
-       border: solid 1px #4CC371;
-       background-color: #4CC371;
-       color: #4CC371; 
+    height: 20px;
+    width: 20px;
+    background-color: #4CC371;
+    border-radius: 50%;
+    display: inline-block;
    }
 
    .inativo{
-       border-radius: 50%;
-       border: solid 1px #F03C3C;
-       background-color: #F03C3C;
-       color: #F03C3C; 
-   } 
+    height: 20px;
+    width: 20px;
+    background-color: #F03C3C;
+    border-radius: 50%;
+    display: inline-block;
+   }
 
 /* Grid Container */
 .grid {
