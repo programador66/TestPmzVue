@@ -9,21 +9,20 @@
                     <th> Nome Completo </th>
                     <th> Registro</th>
                     <th></th>
+                     <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr @click="mouse=true"> 
-                        <td> 022913 </td>
-                        <td> Ana Souza Silva </td>
-                        <td> <span class="ativo"></span> Ativo</td>
-                        <td >  </td>
+                    <tr @click="selecionaLinha(cliente)" v-for="cliente in clientes" :key="codigo" :style="{backgroundColor:cliente.linha? '#F2F0F0':'white'}"> 
+                        <td> {{cliente.codigo}} </td>
+                        <td> {{cliente.nome}} </td>
+                        <td> <span  :class="cliente.registro=='ativo' ? 'ativo': 'inativo'"></span> {{cliente.registro}}</td>
+                        <td v-if="cliente.linha" class="tdEditar"> <button id="btTable">Editar</button>  </td>
+                          <td v-else class="tdEditar">  </td>
+                         <td v-if="cliente.linha"  class="tdExcluir"> <button id="btTable">Excluir</button>  </td>
+                            <td v-else  class="tdExcluir">   </td>
                     </tr>
-                    <tr> 
-                        <td> 022913 </td>
-                        <td> Ana Souza Silva </td>
-                        <td> <span class="inativo"></span> Ativo</td>
-                        <td> </td>
-                    </tr>
+                   
 
                     
                 </tbody>
@@ -38,9 +37,25 @@ export default {
 name: "Table",
 data() {
     return {
-        mouse:false
+        ativo:false,
+        clientes : [
+            {codigo:'001','nome':'Ana Souza','registro':'ativo','linha':false},
+            {codigo:'002','nome':'Rafa jhonson','registro':'inativo','linha':false}
+        ]
+    }
+},
+methods:{
+    selecionaLinha(cliente){
+        this.desativaTodos();
+        cliente.linha = true;
+    },
+    desativaTodos(){
+        this.clientes.forEach(cliente => {
+            cliente.linha = false
+        });
     }
 }
+
 }
 </script>
 
@@ -73,6 +88,15 @@ data() {
       height: 40px;
       border-bottom:solid 1px #4A4A4A;
       text-align: center 
+   }
+   .tdEditar{
+       width: 40px;
+        text-align: left; 
+        border: 2px solid blac 
+   }
+   .tdExcluir{
+       width: 40px;
+       text-align: right; 
    }
    .tab{
        margin-top: 3%;
@@ -108,6 +132,18 @@ data() {
 }
 .subgrid > div {
 	background: rgba(0,0,0,.3);
+}
+
+#btTable{
+  
+    height: 35px;
+    width: 140px;
+    border: solid 1px #1D334B;
+    border-radius: 8px;
+    padding: 0%;
+    background: white;
+    color:  #1D334B;
+    font-weight: bold;
 }
 
 </style>

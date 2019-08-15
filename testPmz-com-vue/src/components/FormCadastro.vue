@@ -13,7 +13,7 @@
                 </div>
                 <div id="FormSalvar">
                     <span><button id="bt" @click="cancelar()">Cancelar</button></span>
-                    <span style="margin-left:3.5%;"><button id="btSalvar">Salvar Cadastro</button></span>
+                    <span style="margin-left:3.5%;"><button id="btSalvar" @click="salvar">Salvar Cadastro</button></span>
                 </div>
            </div>
             <div></div>
@@ -34,6 +34,9 @@ methods:{
         this.$emit('cancelar',false);
         this.$emit('msg1','Bem vindo (a) ao');
         this.$emit('msg2','Sistema TI');
+    },
+    salvar() {
+         this.$emit('snackBar',true);
     }
 }
 }

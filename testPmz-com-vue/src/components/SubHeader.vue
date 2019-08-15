@@ -10,8 +10,9 @@
              <Table/>
          </section>  
          <section v-else>
-             <FormCadastro @cancelar="cadastrar=$event" @msg1="msg1=$event" @msg2="msg2=$event" />
+             <FormCadastro @cancelar="cadastrar=$event" @msg1="msg1=$event" @msg2="msg2=$event"  @snackBar="snack=$event" />
          </section> 
+        <snackBar :snackBar= "snack" @snackBar="snack=$event" />
     </div>
 </template>
 
@@ -19,16 +20,18 @@
 
 import Table from './Table';
 import FormCadastro from './FormCadastro';
+import snackBar from './snackbar';
 export default {
     data:function(){
        return {
            cadastrar:false,
            msg1: 'Bem vindo (a) ao ',
-           msg2: 'Sistema TI'
+           msg2: 'Sistema TI',
+           snack:false
        } 
     },
     components: {
-    Table,FormCadastro
+    Table,FormCadastro,snackBar
   },
     methods:{
          cadastro(){
