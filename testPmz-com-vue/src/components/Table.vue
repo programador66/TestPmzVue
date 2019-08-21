@@ -7,7 +7,7 @@
                     <tr>
                     <th> Código </th>
                     <th> Nome Completo </th>
-                    <th> Registro</th>
+                    <th style="text-align:left;"> Registro</th>
                     <th></th>
                      <th></th>
                     </tr>
@@ -16,7 +16,7 @@
                     <tr @click="selecionaLinha(cliente)" v-for="cliente in clientes" :key="cliente.codigo" :style="{backgroundColor:cliente.linha? '#F2F0F0':'white'}"> 
                         <td> {{cliente.codigo}} </td>
                         <td> {{cliente.nome}} </td>
-                        <td> <span  :class="cliente.registro=='ativo' ? 'ativo': 'inativo'"></span> {{cliente.registro}}</td>
+                        <td style="text-align:left;"> <span  :class="cliente.registro=='ativo' ? 'ativo': 'inativo'"></span> {{cliente.registro}}</td>
                         <td v-if="cliente.linha" class="tdEditar"> <button id="btTable" @click="editar(cliente)">Editar</button>  </td>
                           <td v-else class="tdEditar">  </td>
                          <td v-if="cliente.linha"  class="tdExcluir"> <button id="btTable">Excluir</button>  </td>
