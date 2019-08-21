@@ -5,11 +5,11 @@
            <div class="form container grid grid-template-columns-3">
                 <div id="FormNome">
                     <div id="nomeCompleto"> Nome Completo </div>
-                    <div><input type="text" id="nome"/></div>
+                    <div><input type="text" id="nome" :value="(cliente) ? cliente.nome : '' "/></div>
                 </div>
                 <div id="FormRegistro">
                     <div id="registro"> Registro </div>
-                    <div id="checkRegistro"><input type="checkbox" id="reg"/></div>
+                    <div id="checkRegistro"><input type="checkbox" id="reg" :value="(cliente) ? cliente.registro : 'inativo'" /></div>
                 </div>
                 <div id="FormSalvar">
                     <span><button id="bt" @click="cancelar()">Cancelar</button></span>
@@ -29,6 +29,9 @@ data(){
 
     }
 },
+props:[
+    'cliente'
+],
 methods:{
     cancelar() {
         this.$emit('cancelar',false);

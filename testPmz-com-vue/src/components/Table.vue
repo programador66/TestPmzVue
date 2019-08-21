@@ -13,11 +13,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr @click="selecionaLinha(cliente)" v-for="cliente in clientes" :key="codigo" :style="{backgroundColor:cliente.linha? '#F2F0F0':'white'}"> 
+                    <tr @click="selecionaLinha(cliente)" v-for="cliente in clientes" :key="cliente.codigo" :style="{backgroundColor:cliente.linha? '#F2F0F0':'white'}"> 
                         <td> {{cliente.codigo}} </td>
                         <td> {{cliente.nome}} </td>
                         <td> <span  :class="cliente.registro=='ativo' ? 'ativo': 'inativo'"></span> {{cliente.registro}}</td>
-                        <td v-if="cliente.linha" class="tdEditar"> <button id="btTable">Editar</button>  </td>
+                        <td v-if="cliente.linha" class="tdEditar"> <button id="btTable" @click="editar(cliente)">Editar</button>  </td>
                           <td v-else class="tdEditar">  </td>
                          <td v-if="cliente.linha"  class="tdExcluir"> <button id="btTable">Excluir</button>  </td>
                             <td v-else  class="tdExcluir">   </td>
@@ -53,6 +53,11 @@ methods:{
         this.clientes.forEach(cliente => {
             cliente.linha = false
         });
+    },
+    editar(cliente){
+        this.$emit('cliente',cliente);
+         this.$emit('cadastrar',true);
+         this.$emit('msg2','Editar Cadastro'); 
     }
 }
 

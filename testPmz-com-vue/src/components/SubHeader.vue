@@ -7,11 +7,12 @@
             <button id="btCadastrar" @click="cadastro()" v-if="!cadastrar">Novo cadastro</button>
         </section>
          <section v-if="!cadastrar">
-             <Table/>
+             <Table  @cliente="cliente=$event" @msg2="msg2=$event" @cadastrar="cadastrar=$event"/>
          </section>  
          <section v-else>
-             <FormCadastro @cancelar="cadastrar=$event" @msg1="msg1=$event" @msg2="msg2=$event"  @snackBar="snack=$event" />
-         </section> 
+             <FormCadastro @cancelar="cadastrar=$event" @msg1="msg1=$event" @msg2="msg2=$event"  @snackBar="snack=$event" :cliente="cliente" />
+         </section>
+         
         <snackBar :snackBar= "snack" @snackBar="snack=$event" />
     </div>
 </template>
@@ -27,14 +28,17 @@ export default {
            cadastrar:false,
            msg1: 'Bem vindo (a) ao ',
            msg2: 'Sistema TI',
-           snack:false
+           snack:false,
+           cliente:null,
        } 
     },
     components: {
     Table,FormCadastro,snackBar
   },
     methods:{
+       
          cadastro(){
+            this.cliente = null;
             this.cadastrar = true;
             this.msg1 = 'Sistema TI';
             this.msg2 = 'Novo Cadastro';
