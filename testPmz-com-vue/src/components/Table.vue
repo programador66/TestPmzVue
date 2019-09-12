@@ -13,8 +13,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr @click="selecionaLinha(cliente)" v-for="cliente in clientes" :key="cliente.codigo" :style="{backgroundColor:cliente.linha? '#F2F0F0':'white'}"> 
-                        <td> {{cliente.codigo}} </td>
+                    <tr @click="selecionaLinha(cliente)" v-for="cliente in clientes" :key="cliente.id" :style="{backgroundColor:cliente.linha? '#F2F0F0':'white'}"> 
+                        <td> {{cliente.id}} </td>
                         <td> {{cliente.nome}} </td>
                         <td style="text-align:left;"> <span  :class="cliente.registro=='ativo' ? 'ativo': 'inativo'"></span> {{cliente.registro}}</td>
                         <td v-if="cliente.linha" class="tdEditar"> <button id="btTable" @click="editar(cliente)">Editar</button>  </td>
@@ -33,14 +33,17 @@
 </template>  
 
 <script>
+import axios from 'axios'
 export default {
 name: "Table",
 data() {
     return {
         ativo:false,
         clientes : [
-            {codigo:'001','nome':'Ana Souza','registro':'ativo','linha':false},
-            {codigo:'002','nome':'Rafa jhonson','registro':'inativo','linha':false}
+            // {id:"",
+            // nome:"",
+            // registro:'ativo',
+            // 'linha':false},
         ]
     }
 },
@@ -58,7 +61,24 @@ methods:{
         this.$emit('cliente',cliente);
          this.$emit('cadastrar',true);
          this.$emit('msg2','Editar Cadastro'); 
+    },
+    getUsers(){
+        axios.get('http://teste.pmz/api/users/getUsers')
+        .then((response)=>{
+            this.clientes = response.data.data.map((cliente)=>{
+                return {
+                    id : cliente.id,
+                    nome : cliente.nome,
+                    registro : cliente.registro,
+                    linha : false
+                }
+
+            });
+        });
     }
+},
+mounted(){
+    this.getUsers()
 }
 
 }

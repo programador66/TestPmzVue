@@ -5,15 +5,15 @@
            <div class="form container grid grid-template-columns-3">
                 <div id="FormNome">
                     <div id="nomeCompleto"> Nome Completo </div>
-                    <div><input type="text" id="nome" :value="(cliente) ? cliente.nome : '' "/></div>
+                    <div><input type="text"  id="nome" v-model="nome"/></div>
                 </div>
                 <div id="FormRegistro">
                     <div id="registro"> Registro </div>
-                    <div id="checkRegistro"><input type="checkbox" id="reg" :value="(cliente) ? cliente.registro : 'inativo'" /></div>
+                    <div id="checkRegistro"><input type="checkbox" id="reg" v-model="registro"/></div>
                 </div>
                 <div id="FormSalvar">
                     <span><button id="bt" @click="cancelar()">Cancelar</button></span>
-                    <span style="margin-left:3.5%;"><button id="btSalvar" @click="salvar">Salvar Cadastro</button></span>
+                    <span style="margin-left:3.5%;"><button id="btSalvar" @click="salvar()">Salvar Cadastro</button></span>
                 </div>
            </div>
             <div></div>
@@ -26,12 +26,19 @@ export default {
 name: "FormCadastro",
 data(){
     return {
-
+        nome:'',
+        objCliente:'',
+        registro:false
     }
 },
 props:[
-    'cliente'
+  'cliente'
 ],
+watch:{
+    objCliente: function(e){
+       this.nome = (e.cliente) ? e.cliente.registro : 'inativo';
+    }
+},
 methods:{
     cancelar() {
         this.$emit('cancelar',false);
@@ -39,6 +46,8 @@ methods:{
         this.$emit('msg2','Sistema TI');
     },
     salvar() {
+     
+        console.log(this.registro);
          this.$emit('snackBar',true);
     }
 }
