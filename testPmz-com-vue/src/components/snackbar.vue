@@ -1,7 +1,7 @@
 <template>
     <div id="">
         <!-- The actual snackbar -->
-        <div id="snackbar">testando </div>
+        <div id="snackbar" :style="!color ? `background-color:#ff0000`: `background-color:#4CC371`">{{msg}} </div>
        
     </div>
 </template>
@@ -11,11 +11,11 @@
 export default {
     data:function(){
        return {
-        
+       
        } 
     },
     props:[
-        'snackBar'
+        'snackBar','msg','color'
     ],
     watch:{
         snackBar:function() {

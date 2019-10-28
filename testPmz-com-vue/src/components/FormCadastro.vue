@@ -22,6 +22,8 @@
 </template>  
 
 <script>
+import axios from 'axios';
+
 export default {
 name: "FormCadastro",
 data(){
@@ -46,9 +48,17 @@ methods:{
         this.$emit('msg2','Sistema TI');
     },
     salvar() {
-     
-        console.log(this.registro);
-         this.$emit('snackBar',true);
+        this.$emit('snackBar',true);
+        this.$emit('msgSnack',response.data.message);
+        this.$emit('col',true);
+    //  axios.post('http://teste.pmz/api/users/setUsers',{nome:this.nome,registro:this.registro,}).
+    //  then((response) => {
+         
+    //      this.$emit('snackBar',true);
+    //      this.$emit('msgSnack',response.data.message);
+    //      this.$emit('color','#4CC371');
+    //  })
+       
     }
 }
 }

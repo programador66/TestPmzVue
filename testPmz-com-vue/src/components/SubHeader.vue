@@ -10,10 +10,10 @@
              <Table  @cliente="cliente=$event" @msg2="msg2=$event" @cadastrar="cadastrar=$event"/>
          </section>  
          <section v-else>
-             <FormCadastro @cancelar="cadastrar=$event" @msg1="msg1=$event" @msg2="msg2=$event"  @snackBar="snack=$event" :cliente="cliente" />
+             <FormCadastro @cancelar="cadastrar=$event"  @msgSnack="msgSnack=$event" @col="color=$event"  @msg1="msg1=$event" @msg2="msg2=$event"  @snackBar="snack=$event" :cliente="cliente" />
          </section>
          
-        <snackBar :snackBar= "snack" @snackBar="snack=$event" />
+        <snackBar :snackBar="snack" :msg="msgSnack" @snackBar="snack=$event" :color="color" />
     </div>
 </template>
 
@@ -30,6 +30,8 @@ export default {
            msg2: 'Sistema TI',
            snack:false,
            cliente:null,
+           msgSnack:" ",
+           color: null
        } 
     },
     components: {

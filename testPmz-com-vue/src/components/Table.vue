@@ -16,7 +16,7 @@
                     <tr @click="selecionaLinha(cliente)" v-for="cliente in clientes" :key="cliente.id" :style="{backgroundColor:cliente.linha? '#F2F0F0':'white'}"> 
                         <td> {{cliente.id}} </td>
                         <td> {{cliente.nome}} </td>
-                        <td style="text-align:left;"> <span  :class="cliente.registro=='ativo' ? 'ativo': 'inativo'"></span> {{cliente.registro}}</td>
+                        <td style="text-align:left;"> <span  :class="cliente.registro=='1' ? 'ativo': 'inativo'"></span> </td>
                         <td v-if="cliente.linha" class="tdEditar"> <button id="btTable" @click="editar(cliente)">Editar</button>  </td>
                           <td v-else class="tdEditar">  </td>
                          <td v-if="cliente.linha"  class="tdExcluir"> <button id="btTable">Excluir</button>  </td>
@@ -65,6 +65,8 @@ methods:{
     getUsers(){
         axios.get('http://teste.pmz/api/users/getUsers')
         .then((response)=>{
+            console.log(response);
+            
             this.clientes = response.data.data.map((cliente)=>{
                 return {
                     id : cliente.id,
