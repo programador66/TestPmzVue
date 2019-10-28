@@ -48,16 +48,19 @@ methods:{
         this.$emit('msg2','Sistema TI');
     },
     salvar() {
+       
+     axios.post('http://teste.pmz/api/users/setUsers',{nome:this.nome,registro:this.registro,}).
+     then((response) => {
+         
         this.$emit('snackBar',true);
         this.$emit('msgSnack',response.data.message);
         this.$emit('col',true);
-    //  axios.post('http://teste.pmz/api/users/setUsers',{nome:this.nome,registro:this.registro,}).
-    //  then((response) => {
-         
-    //      this.$emit('snackBar',true);
-    //      this.$emit('msgSnack',response.data.message);
-    //      this.$emit('color','#4CC371');
-    //  })
+     }).
+     catch((error) => {
+        this.$emit('snackBar',true);
+        this.$emit('msgSnack',error.message);
+        this.$emit('col',false);
+     })
        
     }
 }
