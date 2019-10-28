@@ -7,7 +7,7 @@
             <button id="btCadastrar" @click="cadastro()" v-if="!cadastrar">Novo cadastro</button>
         </section>
          <section v-if="!cadastrar">
-             <Table  @cliente="cliente=$event" @msg2="msg2=$event" @cadastrar="cadastrar=$event"/>
+             <Table  @cliente="cliente=$event" @msg2="msg2=$event" @cadastrar="cadastrar=$event" @snackBar="snack=$event" @msgSnack="msgSnack=$event" @col="color=$event" />
          </section>  
          <section v-else>
              <FormCadastro @cancelar="cadastrar=$event"  @msgSnack="msgSnack=$event" @col="color=$event"  @msg1="msg1=$event" @msg2="msg2=$event"  @snackBar="snack=$event" :cliente="cliente" />

@@ -18,13 +18,10 @@
                         <td> {{cliente.nome}} </td>
                         <td style="text-align:left;"> <span  :class="cliente.registro=='1' ? 'ativo': 'inativo'"></span> </td>
                         <td v-if="cliente.linha" class="tdEditar"> <button id="btTable" @click="editar(cliente)">Editar</button>  </td>
-                          <td v-else class="tdEditar">  </td>
-                         <td v-if="cliente.linha"  class="tdExcluir"> <button id="btTable">Excluir</button>  </td>
-                            <td v-else  class="tdExcluir">   </td>
-                    </tr>
-                   
-
-                    
+                        <td v-else class="tdEditar">  </td>
+                        <td v-if="cliente.linha"  class="tdExcluir"> <button id="btTable" @click="excluir(cliente)">Excluir</button>  </td>
+                        <td v-else  class="tdExcluir">   </td>
+                    </tr>    
                 </tbody>
             </table>
             <div></div>
@@ -39,15 +36,28 @@ name: "Table",
 data() {
     return {
         ativo:false,
-        clientes : [
-            // {id:"",
-            // nome:"",
-            // registro:'ativo',
-            // 'linha':false},
-        ]
+        clientes : []
     }
 },
 methods:{
+    excluir(cliente){
+        
+        axios.post('http://teste.pmz/api/users/delUsers',{id:cliente.id})
+        .then((response) => {
+            this.$emit('snackBar',true);
+            this.$emit('msgSnack',response.data.message);
+            this.$emit('col',true);
+            setTimeout(() => {
+                window.location.reload();
+            },2000);
+        })
+        .catch((error) => {
+            this.$emit('snackBar',true);
+            this.$emit('msgSnack',error.message);
+            this.$emit('col',false);
+        });
+
+    },
     selecionaLinha(cliente){
         this.desativaTodos();
         cliente.linha = true;
@@ -59,13 +69,12 @@ methods:{
     },
     editar(cliente){
         this.$emit('cliente',cliente);
-         this.$emit('cadastrar',true);
-         this.$emit('msg2','Editar Cadastro'); 
+        this.$emit('cadastrar',true);
+        this.$emit('msg2','Editar Cadastro'); 
     },
     getUsers(){
         axios.get('http://teste.pmz/api/users/getUsers')
         .then((response)=>{
-            console.log(response);
             
             this.clientes = response.data.data.map((cliente)=>{
                 return {
