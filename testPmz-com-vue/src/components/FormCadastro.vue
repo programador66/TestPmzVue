@@ -59,7 +59,7 @@ methods:{
         setTimeout(() => {
                 window.location.reload();
         },2000);
-        
+
      }).
      catch((error) => {
         this.$emit('snackBar',true);
@@ -192,7 +192,6 @@ methods:{
     border-radius: 8px;
     padding: 0%;
     background: white;
-    font-weight: bold;
     
 }
 

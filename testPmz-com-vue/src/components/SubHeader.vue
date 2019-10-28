@@ -7,12 +7,32 @@
             <button id="btCadastrar" @click="cadastro()" v-if="!cadastrar">Novo cadastro</button>
         </section>
          <section v-if="!cadastrar">
-             <Table  @cliente="cliente=$event" @msg2="msg2=$event" @cadastrar="cadastrar=$event" @snackBar="snack=$event" @msgSnack="msgSnack=$event" @col="color=$event" />
+             <Table  @cliente="cliente=$event" @msg2="msg2=$event" @cadastrar="cadastrar=$event" @snackBar="snack=$event" @msgSnack="msgSnack=$event" @col="color=$event" @modal="modal($event)" @excluir="cliente=$event" />
          </section>  
          <section v-else>
              <FormCadastro @cancelar="cadastrar=$event"  @msgSnack="msgSnack=$event" @col="color=$event"  @msg1="msg1=$event" @msg2="msg2=$event"  @snackBar="snack=$event" :cliente="cliente" />
          </section>
          
+         <section>
+             <div class="w3-container">
+                <div id="id01" class="w3-modal" >
+                    <div class="w3-modal-content w3-animate-top w3-card-4" style="width:600px;">
+                    <header class="w3-container pmz"> 
+                        <span onclick="document.getElementById('id01').style.display='none'" 
+                        class="w3-button w3-display-topright" >&times;</span>
+                        <h2>Excluir Usuário</h2>
+                    </header>
+                    <div class="w3-container" style="height:150px;">
+                        <p>Tem certeza que deseja excluir o usuário?</p>
+                        <button class="decisao" onclick="document.getElementById('id01').style.display='none'">Não</button>
+                        <button class="decisao" @click="excluir()">Sim</button>
+                    </div>
+                   
+                    </div>
+                </div>
+                </div>
+         </section>
+
         <snackBar :snackBar="snack" :msg="msgSnack" @snackBar="snack=$event" :color="color" />
     </div>
 </template>
@@ -22,6 +42,8 @@
 import Table from './Table';
 import FormCadastro from './FormCadastro';
 import snackBar from './snackbar';
+import axios from 'axios';
+
 export default {
     data:function(){
        return {
@@ -31,7 +53,8 @@ export default {
            snack:false,
            cliente:null,
            msgSnack:" ",
-           color: null
+           color: null,
+           cliente:[]
        } 
     },
     components: {
@@ -44,6 +67,28 @@ export default {
             this.cadastrar = true;
             this.msg1 = 'Sistema TI';
             this.msg2 = 'Novo Cadastro';
+        },
+        modal(modal){
+            if (modal) {
+                document.getElementById('id01').style.display='block';
+            }   
+        },
+        excluir(){
+            document.getElementById('id01').style.display='none';
+            axios.post('http://teste.pmz/api/users/delUsers',{id:this.cliente.id})
+            .then((response) => {
+                this.snack = true;
+                this.msgSnack = response.data.message;
+                this.color = true;
+                setTimeout(() => {
+                    window.location.reload();
+                },2000);
+            })
+            .catch((error) => {
+                this.snack = true;
+                this.msgSnack = error.message;
+                this.color = false;
+            });  
         }      
     },
 name: "subheader"
@@ -51,6 +96,10 @@ name: "subheader"
 </script>
 
 <style scoped>
+.pmz{
+    background: #1D334B;
+    color : white;
+}
 
 #subheader{
   margin-top: 3%;
@@ -93,6 +142,19 @@ text-align: left;
     text-align: left;
 }
 
+.decisao{
+   margin-top: 2%;
+    height: 35px;
+    width: 182px;
+    border: solid 1px #1D334B;
+    border-radius: 8px;
+    padding: 0%;
+    background: white; 
+}
+.decisao:hover{
+    background: #1D334B;
+    color : white;
+}
 #btCadastrar{
     margin-top: 2%;
     height: 35px;

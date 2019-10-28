@@ -41,22 +41,8 @@ data() {
 },
 methods:{
     excluir(cliente){
-        
-        axios.post('http://teste.pmz/api/users/delUsers',{id:cliente.id})
-        .then((response) => {
-            this.$emit('snackBar',true);
-            this.$emit('msgSnack',response.data.message);
-            this.$emit('col',true);
-            setTimeout(() => {
-                window.location.reload();
-            },2000);
-        })
-        .catch((error) => {
-            this.$emit('snackBar',true);
-            this.$emit('msgSnack',error.message);
-            this.$emit('col',false);
-        });
-
+        this.$emit('modal',true);
+        this.$emit('excluir',cliente);
     },
     selecionaLinha(cliente){
         this.desativaTodos();
