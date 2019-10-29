@@ -61,13 +61,23 @@ methods:{
         axios.post('http://teste.pmz/api/users/setUsers',{nome:this.nome,registro:this.registro,}).
         then((response) => {
             
-            this.$emit('snackBar',true);
-            this.$emit('msgSnack',response.data.message);
-            this.$emit('col',true);
+            if (response.data.success) {
+                
+                this.$emit('snackBar',true);
+                this.$emit('msgSnack',response.data.message);
+                this.$emit('col',true);
 
-            setTimeout(() => {
-                    window.location.reload();
-            },2000);
+                setTimeout(() => {
+                        window.location.reload();
+                },2000);
+            } else {
+
+                const mensagem = response.data.message.nome[0] || 'Verifique os campos nullos!';
+                this.$emit('snackBar',true);
+                this.$emit('msgSnack',mensagem);
+                this.$emit('col',false);
+            }
+            
 
         }).
         catch((error) => {
@@ -91,6 +101,7 @@ methods:{
 
         }).
         catch((error) => {
+           
             this.$emit('snackBar',true);
             this.$emit('msgSnack',error.message);
             this.$emit('col',false);

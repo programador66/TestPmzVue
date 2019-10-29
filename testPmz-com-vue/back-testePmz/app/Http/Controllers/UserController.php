@@ -46,17 +46,22 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        $mensagens = [
+            'required' => 'O :attribute é obrigatório!'
+        ];
+
         $validator = Validator::make($request->all(),[
             'nome' => 'required',
             'registro' => 'required'
-        ]);
+        ],$mensagens);
+        
         if ($validator->fails()) {
            
             return Response()->json([
                 self::SUCCESS => false,
                 self::MESSAGE => $validator->errors()
-            ],500);
+            ],200);
                
         }
         $response = $this->userService->userInsert($request['nome'],$request['registro']);
