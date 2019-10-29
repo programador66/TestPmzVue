@@ -28,17 +28,24 @@ export default {
 name: "FormCadastro",
 data(){
     return {
-        nome:'',
+        id:null,
+        nome:"",
         objCliente:'',
         registro:false
     }
 },
 props:[
-  'cliente'
+  'cliente','clienteEditar'
 ],
 watch:{
     objCliente: function(e){
        this.nome = (e.cliente) ? e.cliente.registro : 'inativo';
+    },
+    clienteEditar(cliente) {
+        
+        this.nome = cliente.nome;
+        this.registro = (cliente.registro==="1") ? true : false;
+        this.id = cliente.id;
     }
 },
 methods:{
@@ -49,23 +56,47 @@ methods:{
     },
     salvar() {
        
-     axios.post('http://teste.pmz/api/users/setUsers',{nome:this.nome,registro:this.registro,}).
-     then((response) => {
-         
-        this.$emit('snackBar',true);
-        this.$emit('msgSnack',response.data.message);
-        this.$emit('col',true);
+     if (this.id == null) {
+        
+        axios.post('http://teste.pmz/api/users/setUsers',{nome:this.nome,registro:this.registro,}).
+        then((response) => {
+            
+            this.$emit('snackBar',true);
+            this.$emit('msgSnack',response.data.message);
+            this.$emit('col',true);
 
-        setTimeout(() => {
-                window.location.reload();
-        },2000);
+            setTimeout(() => {
+                    window.location.reload();
+            },2000);
 
-     }).
-     catch((error) => {
-        this.$emit('snackBar',true);
-        this.$emit('msgSnack',error.message);
-        this.$emit('col',false);
-     })
+        }).
+        catch((error) => {
+            this.$emit('snackBar',true);
+            this.$emit('msgSnack',error.message);
+            this.$emit('col',false);
+        });
+
+     } else {
+        
+        axios.post('http://teste.pmz/api/users/upUsers',{id:this.id, nome:this.nome, registro:this.registro}).
+        then((response) => {
+            
+            this.$emit('snackBar',true);
+            this.$emit('msgSnack',response.data.message);
+            this.$emit('col',true);
+
+            setTimeout(() => {
+                    window.location.reload();
+            },2000);
+
+        }).
+        catch((error) => {
+            this.$emit('snackBar',true);
+            this.$emit('msgSnack',error.message);
+            this.$emit('col',false);
+        });
+     }
+     
        
     }
 }

@@ -6,11 +6,29 @@
             <div ></div>
             <button id="btCadastrar" @click="cadastro()" v-if="!cadastrar">Novo cadastro</button>
         </section>
-         <section v-if="!cadastrar">
-             <Table  @cliente="cliente=$event" @msg2="msg2=$event" @cadastrar="cadastrar=$event" @snackBar="snack=$event" @msgSnack="msgSnack=$event" @col="color=$event" @modal="modal($event)" @excluir="cliente=$event" />
+         <section v-show="!cadastrar">
+             <Table  
+                @cliente="clienteEdit = $event" 
+                @msg2="msg2=$event" 
+                @cadastrar="cadastrar=$event"
+                @snackBar="snack=$event" 
+                @msgSnack="msgSnack=$event" 
+                @col="color=$event" 
+                @modal="modal($event)"
+                @excluir="cliente=$event"
+            />
          </section>  
-         <section v-else>
-             <FormCadastro @cancelar="cadastrar=$event"  @msgSnack="msgSnack=$event" @col="color=$event"  @msg1="msg1=$event" @msg2="msg2=$event"  @snackBar="snack=$event" :cliente="cliente" />
+         <section v-show="cadastrar">
+            <FormCadastro 
+                @cancelar="cadastrar=$event" 
+                @msgSnack="msgSnack=$event" 
+                @col="color=$event"  
+                @msg1="msg1=$event"
+                @msg2="msg2=$event" 
+                @snackBar="snack=$event"
+                :cliente="cliente" 
+                :clienteEditar="clienteEdit"
+             />
          </section>
          
          <section>
@@ -45,24 +63,24 @@ import snackBar from './snackbar';
 import axios from 'axios';
 
 export default {
+    name: "subheader",
+    components: {
+    Table,FormCadastro,snackBar
+    },
     data:function(){
        return {
            cadastrar:false,
            msg1: 'Bem vindo (a) ao ',
            msg2: 'Sistema TI',
            snack:false,
-           cliente:null,
+           clienteEdit:null,
            msgSnack:" ",
            color: null,
            cliente:[]
        } 
     },
-    components: {
-    Table,FormCadastro,snackBar
-  },
     methods:{
-       
-         cadastro(){
+        cadastro(){
             this.cliente = null;
             this.cadastrar = true;
             this.msg1 = 'Sistema TI';
@@ -90,8 +108,7 @@ export default {
                 this.color = false;
             });  
         }      
-    },
-name: "subheader"
+    }
 }
 </script>
 

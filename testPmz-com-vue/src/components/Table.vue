@@ -62,7 +62,7 @@ methods:{
         axios.get('http://teste.pmz/api/users/getUsers')
         .then((response)=>{
             
-            this.clientes = response.data.data.map((cliente)=>{
+            this.clientes = response.data.data.map((cliente) => {
                 return {
                     id : cliente.id,
                     nome : cliente.nome,
